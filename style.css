@@ -4,6 +4,36 @@
     "Hiragino Sans", "Yu Gothic", Meiryo, system-ui, -apple-system, sans-serif;
   color: #263238;
   background: #f1f7f5;
+  --page-background:
+    radial-gradient(circle at 15% 15%, rgb(38 166 154 / 12%), transparent 30%),
+    radial-gradient(circle at 85% 85%, rgb(63 81 181 / 10%), transparent 30%),
+    #f4f8f7;
+  --card-background: rgb(255 255 255 / 94%);
+  --card-border: #dce9e6;
+  --card-shadow: rgb(38 50 56 / 10%);
+  --heading-color: #1d2b2f;
+  --body-color: #58676b;
+  --accent-color: #147d72;
+  --accent-hover: #0f695f;
+  --button-text: #fff;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  color: #eef7f5;
+  background: #101817;
+  --page-background:
+    radial-gradient(circle at 15% 15%, rgb(38 166 154 / 18%), transparent 30%),
+    radial-gradient(circle at 85% 85%, rgb(92 107 192 / 14%), transparent 30%),
+    #101817;
+  --card-background: rgb(28 42 40 / 96%);
+  --card-border: #38524e;
+  --card-shadow: rgb(0 0 0 / 30%);
+  --heading-color: #f7fbfa;
+  --body-color: #c9d7d4;
+  --accent-color: #4fc3b5;
+  --accent-hover: #39aa9d;
+  --button-text: #10201e;
 }
 
 * {
@@ -16,20 +46,30 @@ body {
   display: grid;
   place-items: center;
   padding: 24px;
-  background:
-    radial-gradient(circle at 15% 15%, rgb(38 166 154 / 12%), transparent 30%),
-    radial-gradient(circle at 85% 85%, rgb(63 81 181 / 10%), transparent 30%),
-    #f4f8f7;
+  background: var(--page-background);
+  transition: background 200ms ease;
 }
 
 .card {
   width: min(100%, 680px);
   padding: 56px 48px 48px;
   text-align: center;
-  background: rgb(255 255 255 / 94%);
-  border: 1px solid #dce9e6;
+  background: var(--card-background);
+  border: 1px solid var(--card-border);
   border-radius: 24px;
-  box-shadow: 0 18px 50px rgb(38 50 56 / 10%);
+  box-shadow: 0 18px 50px var(--card-shadow);
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: auto;
+  padding: 10px 16px;
 }
 
 .icon {
@@ -40,7 +80,7 @@ body {
   margin: 0 auto 24px;
   border-radius: 18px;
   color: #fff;
-  background: #147d72;
+  background: var(--accent-color);
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 20px;
   font-weight: 700;
@@ -49,7 +89,7 @@ body {
 
 .eyebrow {
   margin: 0 0 8px;
-  color: #147d72;
+  color: var(--accent-color);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.2em;
@@ -57,7 +97,7 @@ body {
 
 h1 {
   margin: 0;
-  color: #1d2b2f;
+  color: var(--heading-color);
   font-size: clamp(36px, 8vw, 56px);
   line-height: 1.15;
   letter-spacing: -0.03em;
@@ -65,7 +105,7 @@ h1 {
 
 .description {
   margin: 24px auto 32px;
-  color: #58676b;
+  color: var(--body-color);
   font-size: 16px;
   line-height: 2;
 }
@@ -75,8 +115,8 @@ button {
   padding: 14px 24px;
   border: 0;
   border-radius: 999px;
-  color: #fff;
-  background: #147d72;
+  color: var(--button-text);
+  background: var(--accent-color);
   font: inherit;
   font-weight: 700;
   cursor: pointer;
@@ -88,7 +128,7 @@ button {
 }
 
 button:hover {
-  background: #0f695f;
+  background: var(--accent-hover);
   box-shadow: 0 9px 20px rgb(20 125 114 / 30%);
   transform: translateY(-2px);
 }
@@ -104,7 +144,7 @@ button:focus-visible {
 
 .message {
   margin: 24px 0 0;
-  color: #147d72;
+  color: var(--accent-color);
   font-size: 18px;
   font-weight: 700;
   animation: appear 300ms ease-out;
@@ -123,6 +163,16 @@ button:focus-visible {
 }
 
 @media (max-width: 520px) {
+  body {
+    padding: 76px 16px 24px;
+  }
+
+  .theme-toggle {
+    top: 12px;
+    right: 12px;
+    padding: 9px 12px;
+  }
+
   .card {
     padding: 40px 24px 36px;
   }
